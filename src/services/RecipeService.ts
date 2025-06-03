@@ -3,7 +3,7 @@ import { IRecipesResponse } from "../types/responses/recipes.response.interface"
 import { IRecipeResponse } from "../types/responses/recipe.response.interface";
 
 export class RecipeService {
-  private recipesApiUrl = "https://www.themealdb.com/api/json/v1/1/";
+  private recipesApiUrl = process.env.API_URL;
 
   async getRecipes() {
     try {
