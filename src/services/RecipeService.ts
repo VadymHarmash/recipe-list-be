@@ -30,4 +30,45 @@ export class RecipeService {
       throw new Error("Не вдалося отримати рецепти");
     }
   }
+  async getRecipesByIngredient(ingredient: string) {
+    try {
+      const { data } = await axios.get<IRecipesResponse>(
+        `${this.recipesApiUrl}filter.php?i=${ingredient}`,
+      );
+      return data;
+    } catch (error) {
+      console.error(
+        `Error fetching from API by ingredient '${ingredient}':`,
+        error,
+      );
+      throw new Error("Failed to retrieve recipes by ingredient");
+    }
+  }
+
+  async getRecipesByCountry(country: string) {
+    try {
+      const { data } = await axios.get<IRecipesResponse>(
+        `${this.recipesApiUrl}filter.php?a=${country}`,
+      );
+      return data;
+    } catch (error) {
+      console.error(`Error fetching from API by country '${country}':`, error);
+      throw new Error("Failed to retrieve recipes by country");
+    }
+  }
+
+  async getRecipesByCategory(category: string) {
+    try {
+      const { data } = await axios.get<IRecipesResponse>(
+        `${this.recipesApiUrl}filter.php?c=${category}`,
+      );
+      return data;
+    } catch (error) {
+      console.error(
+        `Error fetching from API by category '${category}':`,
+        error,
+      );
+      throw new Error("Failed to retrieve recipes by category");
+    }
+  }
 }
